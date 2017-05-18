@@ -15,4 +15,15 @@ public class UserService {
   @Autowired
   UserRepository userRepository;
 
+  public String setMainPage(){
+    if (userRepository.findOne(1l) == null) {
+      return "redirect:/enter";
+    } else {
+      return "index";
+    }
+  }
+
+
+
+
 }

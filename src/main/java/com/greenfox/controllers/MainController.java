@@ -7,12 +7,11 @@ import com.greenfox.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by Connor on 2017.05.17..
@@ -22,9 +21,6 @@ public class MainController {
 
   @Autowired
   UserRepository userRepository;
-
-  @Autowired
-  ModelAndView modelAndView;
 
   @Autowired
   UserService userService;
@@ -37,18 +33,18 @@ public class MainController {
 
   @GetMapping("/")
   public String getIndexPage() {
-    if(userRepository.findOne(1l) == null) {
-      return "redirect:/enter";
-    } else {
-      return "index";
-    }
+    return userService.setMainPage();
   }
 
   @GetMapping("/enter")
-  public ModelAndView enterUser() {
-    modelAndView.addObject("user", new User());
-    modelAndView.setViewName("enter");
-    return modelAndView;
+  public String enterUser(Model model) {
+    if(userRepository.findOne(1l) == null){
+      model.addAttribute("user", new User());
+      return "enter";
+    } else {
+      return "redirect:/";
+    }
+
   }
 
   @PostMapping("/entering")
