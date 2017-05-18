@@ -2,8 +2,9 @@ package com.greenfox.controllers;
 
 import com.greenfox.models.LogMessage;
 import com.greenfox.models.User;
+import com.greenfox.models.UserMessage;
+import com.greenfox.repository.UserMessageRepository;
 import com.greenfox.repository.UserRepository;
-import com.greenfox.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class MainController {
   UserRepository userRepository;
 
   @Autowired
-  UserService userService;
+  UserMessageRepository userMessageRepository;
 
   @ModelAttribute
   public void createLogMessage(HttpServletRequest request) {
@@ -32,19 +33,23 @@ public class MainController {
   }
 
   @GetMapping("/")
-  public String getIndexPage() {
-    return userService.setMainPage();
+  public String getIndexPage(Model model) {
+    if (userRepository.findOne(1l) == null) {
+      return "redirect:/enter";
+    } else {
+      model.addAttribute("messages", userMessageRepository.findAll());
+      return "index";
+    }
   }
 
   @GetMapping("/enter")
   public String enterUser(Model model) {
-    if(userRepository.findOne(1l) == null){
+    if (userRepository.findOne(1l) == null) {
       model.addAttribute("user", new User());
       return "enter";
     } else {
       return "redirect:/";
     }
-
   }
 
   @PostMapping("/entering")
@@ -58,6 +63,13 @@ public class MainController {
     User user = userRepository.findOne(1l);
     user.setUserName(newUserName);
     userRepository.save(user);
+    return "redirect:/";
+  }
+
+  @PostMapping("/addingnewmessage")
+  public String addNewMessage(@RequestParam String newMessage) {
+    UserMessage userMessage = new UserMessage(userRepository.findOne(1l).getUserName(), newMessage);
+    userMessageRepository.save(userMessage);
     return "redirect:/";
   }
 }

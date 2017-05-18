@@ -11,5 +11,19 @@
   Your username: <input type="text" name="newUserName"/>
   <input type="submit" value="Update"/>
 </form>
+<ul th:each="message: ${messages}">
+  <li>
+    <div th:text="${message.getUserName()}"></div>
+    <div th:text="${message.getText()}"></div>
+  </li>
+</ul>
+<form action="/addingnewmessage" method="post">
+  <textarea th:type="text" name="newMessage" rows="8" cols="40">
+    Enter your message...
+  </textarea>
+  <input type="submit" value="Send"/>
+</form>
 </body>
 </html>
+
+
