@@ -15,7 +15,4 @@ public class UserService {
   @Autowired
   UserRepository userRepository;
 
-  public void updateUserName(String userName) {
-    userRepository.findById(0l).setUserName(userName);
-  }
 }

@@ -37,7 +37,7 @@ public class MainController {
 
   @GetMapping("/")
   public String getIndexPage() {
-    if(userRepository.findAll() == null) {
+    if(userRepository.findOne(1l) == null) {
       return "redirect:/enter";
     } else {
       return "index";
@@ -59,7 +59,9 @@ public class MainController {
 
   @PostMapping("/updating")
   public String updateUser(@RequestParam String newUserName) {
-    userRepository.findById(0l).setUserName(newUserName);
+    User user = userRepository.findOne(1l);
+    user.setUserName(newUserName);
+    userRepository.save(user);
     return "redirect:/";
   }
 }
