@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Enter name</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+<h1 th:text="'Enter'"></h1>
+<form action="/entering" method="post">
+  Choose your name: <input type="text" name="userName"/>
+  <input type="submit" value="Enter"/>
+</form>
+</body>
+</html>
+
+
+
