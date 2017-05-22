@@ -66,10 +66,25 @@ public class MainController {
     return "redirect:/";
   }
 
-  @PostMapping("/addingnewmessage")
+  @PostMapping("/addmessage")
   public String addNewMessage(@RequestParam String newMessage) {
     UserMessage userMessage = new UserMessage(userRepository.findOne(1l).getUserName(), newMessage);
     userMessageRepository.save(userMessage);
     return "redirect:/";
   }
 }
+
+/*
+  String url = "https://limitless-thicket-98020.herokuapp.com/posts";
+  RestTemplate restTemplate = new RestTemplate();
+
+  @GetMapping("/add")
+  public Post index(
+          @RequestParam(name = "title") String title,
+          @RequestParam(name = "href") String href) {
+
+    Post p = new Post(title, href);
+
+    Post newPost = restTemplate.postForObject(url, p, Post.class);
+    return newPost;
+  }*/

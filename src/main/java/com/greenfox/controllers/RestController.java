@@ -28,18 +28,4 @@ public class RestController {
 
 }
 
-/*
 
-  String url = "https://limitless-thicket-98020.herokuapp.com/posts";
-  RestTemplate restTemplate = new RestTemplate();
-
-  @GetMapping("/add")
-  public Post index(
-          @RequestParam(name = "title") String title,
-          @RequestParam(name = "href") String href) {
-
-    Post p = new Post(title, href);
-
-    Post newPost = restTemplate.postForObject(url, p, Post.class);
-    return newPost;
-  }*/

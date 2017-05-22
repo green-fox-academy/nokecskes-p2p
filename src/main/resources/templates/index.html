@@ -19,11 +19,11 @@
 </ul>
 <ul th:each="message: ${messages}">
   <li>
-    <div th:text="${message.getUserName()}"></div>
+    <div th:text="${message.getUsername()}"></div>
     <div th:text="${message.getText()}"></div>
   </li>
 </ul>
-<form action="/addingnewmessage" method="post">
+<form action="/addmessage" method="post">
   <textarea th:type="text" name="newMessage" rows="8" cols="40">
     Enter your message...
   </textarea>
