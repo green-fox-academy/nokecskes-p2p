@@ -28,9 +28,6 @@ public class MainController {
   @Autowired
   UserMessageRepository userMessageRepository;
 
-  String url = System.getenv("CHAT_APP_PEER_ADDRESSS");
-
-
   @ModelAttribute
   public void createLogMessage(HttpServletRequest request) {
     LogMessage logMessage = new LogMessage(request);
@@ -71,16 +68,6 @@ public class MainController {
     return "redirect:/";
   }
 
-  @PostMapping("/addmessage")
-  public String addNewMessage(@RequestParam String newMessage) {
-    UserMessage userMessage = new UserMessage(userRepository.findOne(1l).getUserName(), newMessage);
-    userMessageRepository.save(userMessage);
-    MessagePacket messagePacket = new MessagePacket(userMessage,
-        System.getenv("CHAT_APP_UNIQUE_ID"));
-    RestTemplate restTemplate = new RestTemplate();
-    restTemplate.postForObject(url, messagePacket, MessagePacket.class);
-    return "redirect:/";
-  }
 }
 
 
