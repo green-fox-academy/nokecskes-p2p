@@ -28,6 +28,9 @@ public class MainController {
   @Autowired
   UserMessageRepository userMessageRepository;
 
+  String url = System.getenv("CHAT_APP_PEER_ADDRESSS");
+
+
   @ModelAttribute
   public void createLogMessage(HttpServletRequest request) {
     LogMessage logMessage = new LogMessage(request);
@@ -72,25 +75,12 @@ public class MainController {
   public String addNewMessage(@RequestParam String newMessage) {
     UserMessage userMessage = new UserMessage(userRepository.findOne(1l).getUserName(), newMessage);
     userMessageRepository.save(userMessage);
-    MessagePacket messagePacket = new MessagePacket(userMessage, userRepository.findOne(1l).getUserName());
-    String url = "https://dorinagychatapp.herokuapp.com/api/message/receive";
+    MessagePacket messagePacket = new MessagePacket(userMessage,
+        System.getenv("CHAT_APP_UNIQUE_ID"));
     RestTemplate restTemplate = new RestTemplate();
     restTemplate.postForObject(url, messagePacket, MessagePacket.class);
     return "redirect:/";
   }
 }
 
-/*
-  String url = "https://limitless-thicket-98020.herokuapp.com/posts";
-  RestTemplate restTemplate = new RestTemplate();
 
-  @GetMapping("/add")
-  public Post index(
-          @RequestParam(name = "title") String title,
-          @RequestParam(name = "href") String href) {
-
-    Post p = new Post(title, href);
-
-    Post newPost = restTemplate.postForObject(url, p, Post.class);
-    return newPost;
-  }*/
