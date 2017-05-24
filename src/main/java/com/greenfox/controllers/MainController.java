@@ -73,7 +73,7 @@ public class MainController {
     UserMessage userMessage = new UserMessage(userRepository.findOne(1l).getUserName(), newMessage);
     userMessageRepository.save(userMessage);
     MessagePacket messagePacket = new MessagePacket(userMessage, userRepository.findOne(1l).getUserName());
-    String url = "https://limitless-thicket-98020.herokuapp.com/posts";
+    String url = "https://dorinagychatapp.herokuapp.com/api/message/receive";
     RestTemplate restTemplate = new RestTemplate();
     restTemplate.postForObject(url, messagePacket, MessagePacket.class);
     return "redirect:/";
