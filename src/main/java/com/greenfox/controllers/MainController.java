@@ -1,9 +1,7 @@
 package com.greenfox.controllers;
 
 import com.greenfox.models.LogMessage;
-import com.greenfox.models.MessagePacket;
 import com.greenfox.models.User;
-import com.greenfox.models.UserMessage;
 import com.greenfox.repository.UserMessageRepository;
 import com.greenfox.repository.UserRepository;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * Created by Connor on 2017.05.17..
@@ -55,15 +52,15 @@ public class MainController {
   }
 
   @PostMapping("/entering")
-  public String saveNewUser(@RequestParam String userName) {
-    userRepository.save(new User(userName));
+  public String saveNewUser(@RequestParam String username) {
+    userRepository.save(new User(username));
     return "redirect:/";
   }
 
   @PostMapping("/updating")
-  public String updateUser(@RequestParam String newUserName) {
+  public String updateUser(@RequestParam String newUsername) {
     User user = userRepository.findOne(1l);
-    user.setUserName(newUserName);
+    user.setUsername(newUsername);
     userRepository.save(user);
     return "redirect:/";
   }

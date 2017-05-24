@@ -5,8 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Created by Connor on 2017.05.17..
@@ -19,14 +17,14 @@ public class User {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  private String userName;
+  private String username;
 
   public User() {
-    this.userName = "unknown";
+    this.username = "unknown";
   }
 
-  public User(String userName) {
-    this.userName = userName;
+  public User(String username) {
+    this.username = username;
   }
 
   public Long getId() {
@@ -37,11 +35,11 @@ public class User {
     this.id = id;
   }
 
-  public String getUserName() {
-    return userName;
+  public String getUsername() {
+    return username;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setUsername(String username) {
+    this.username = username;
   }
 }

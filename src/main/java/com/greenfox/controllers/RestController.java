@@ -5,6 +5,8 @@ import com.greenfox.models.MessagePacket;
 import com.greenfox.models.UserMessage;
 import com.greenfox.repository.UserMessageRepository;
 import com.greenfox.repository.UserRepository;
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,14 +34,21 @@ public class RestController {
   }
 
   @PostMapping("/addmessage")
-  public String addNewMessage(@RequestParam String newMessage) {
-    UserMessage userMessage = new UserMessage(userRepository.findOne(1l).getUserName(), newMessage);
+  public void addNewMessage(@RequestParam String newMessage, HttpServletResponse response) throws IOException {
+    UserMessage userMessage = new UserMessage(userRepository.findOne(1l).getUsername(), newMessage);
     userMessageRepository.save(userMessage);
     MessagePacket messagePacket = new MessagePacket(userMessage,
         System.getenv("CHAT_APP_UNIQUE_ID"));
     RestTemplate restTemplate = new RestTemplate();
-    restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESSS"), messagePacket, MessagePacket.class);
-    return "redirect:/";
+    System.out.println("----> DEBUG: " + System.getenv("CHAT_APP_PEER_ADDRESS"));
+    System.out.println("----> DEBUG: " + System.getenv("CHAT_APP_UNIQUE_ID"));
+    try {
+      restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), messagePacket, MessagePacket.class);
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+    response.sendRedirect("/");
+    //return "redirect:/";
   }
 
 }
