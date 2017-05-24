@@ -12,8 +12,6 @@ import lombok.Setter;
  * Created by Connor on 2017.05.17..
  */
 @Entity
-@Getter
-@Setter
 @Table(name = "usertable")
 public class User {
 
@@ -28,6 +26,22 @@ public class User {
   }
 
   public User(String userName) {
+    this.userName = userName;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
     this.userName = userName;
   }
 }

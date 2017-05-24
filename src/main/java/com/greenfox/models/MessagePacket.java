@@ -3,16 +3,21 @@ package com.greenfox.models;
 /**
  * Created by Connor on 2017.05.22..
  */
-public class ReceivedMessage {
+public class MessagePacket {
 
   private UserMessage message;
   private Client client;
 
-  public ReceivedMessage() {
+  public MessagePacket() {
   }
 
   public UserMessage getMessage() {
     return message;
+  }
+
+  public MessagePacket(UserMessage message, String client) {
+    this.message = message;
+    this.client = new Client(client);
   }
 
   public void setMessage(UserMessage message) {

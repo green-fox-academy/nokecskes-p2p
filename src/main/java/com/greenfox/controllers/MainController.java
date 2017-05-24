@@ -1,6 +1,7 @@
 package com.greenfox.controllers;
 
 import com.greenfox.models.LogMessage;
+import com.greenfox.models.MessagePacket;
 import com.greenfox.models.User;
 import com.greenfox.models.UserMessage;
 import com.greenfox.repository.UserMessageRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Created by Connor on 2017.05.17..
@@ -70,6 +72,10 @@ public class MainController {
   public String addNewMessage(@RequestParam String newMessage) {
     UserMessage userMessage = new UserMessage(userRepository.findOne(1l).getUserName(), newMessage);
     userMessageRepository.save(userMessage);
+    MessagePacket messagePacket = new MessagePacket(userMessage, userRepository.findOne(1l).getUserName());
+    String url = "https://limitless-thicket-98020.herokuapp.com/posts";
+    RestTemplate restTemplate = new RestTemplate();
+    restTemplate.postForObject(url, messagePacket, MessagePacket.class);
     return "redirect:/";
   }
 }
