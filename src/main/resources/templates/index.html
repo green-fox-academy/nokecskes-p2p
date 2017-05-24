@@ -3,33 +3,45 @@
 <head>
   <title>ChatApp</title>
   <meta charset="UTF-8"/>
+  <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
-<h1 th:text="'Peer to Peer Chat Program'"></h1>
-<form action="/updating" method="post">
-  Your username: <input type="text" name="newUsername"/>
-  <input type="submit" value="Update"/>
-</form>
-<ul>
-  <li>
-    <div th:text="App"></div>
-    <div th:text="'Hi there! Submit your message using the send button!'"></div>
-  </li>
-</ul>
-<ul th:each="message: ${messages}">
-  <li>
-    <div th:text="${message.getUsername()}"></div>
-    <div th:text="${message.getText()}"></div>
-  </li>
-</ul>
-<form action="/addmessage" method="post">
-  <textarea th:type="text" name="newMessage" rows="8" cols="40">
+<h1 class="text-capitalize text-center" th:text="'peer to peer chat program'"></h1>
+<div class="container-fluid col-md-4">
+  <h3 class="text-capitalize" th:text="'change your user name'"></h3>
+  <form action="/updating" method="post">
+    Your username: <input type="text" th:placeholder="${username}" name="newUsername"/>
+    <input type="submit" class="btn btn-danger" value="Update"/>
+  </form>
+  <h3 class="text-capitalize" th:text="'send a message '"></h3>
+  <div>
+    <form action="/addmessage" method="post">
+    <textarea th:type="text" name="newMessage" rows="8" cols="40">
     Enter your message...
-  </textarea>
-  <input type="submit" value="Send"/>
-</form>
-<div><a th:href="@{/}" th:text="Refresh"></a></div>
+    </textarea>
+      <input class="btn btn-warning" type="submit" value="Send"/>
+    </form>
+  </div>
+  <div><a class="btn btn-info" th:href="@{/}" th:text="Refresh"></a></div>
+</div>
+<h3 class="text-capitalize" th:text="'messages'"></h3>
+<div class="container-fluid col-md-4">
+  <ul>
+    <li>
+      <h4 class="bg-danger" th:text="App"></h4>
+      <div class="bg-warning" th:text="'Hi there! Submit your message using the send button!'"></div>
+    </li>
+  </ul>
+  <ul th:each="message: ${messages}">
+    <li>
+      <h4 class="bg-danger" th:text="${message.getUsername()}"></h4>
+      <div class="bg-warning" th:text="${message.getText()}"></div>
+    </li>
+  </ul>
+</div>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 </body>
 </html>
 

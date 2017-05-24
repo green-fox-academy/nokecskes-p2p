@@ -36,6 +36,7 @@ public class MainController {
     if (userRepository.findOne(1l) == null) {
       return "redirect:/enter";
     } else {
+      model.addAttribute("username", userRepository.findOne(1l).getUsername());
       model.addAttribute("messages", userMessageRepository.findAll());
       return "index";
     }

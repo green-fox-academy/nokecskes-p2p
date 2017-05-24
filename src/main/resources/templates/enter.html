@@ -3,14 +3,17 @@
 <head>
   <title>Enter name</title>
   <meta charset="UTF-8"/>
+  <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
-<h1 th:text="'Enter'"></h1>
+<h1 class="text-capitalize" th:text="'enter'"></h1>
 <form action="/entering" method="post">
   Choose your name: <input type="text" name="username"/>
-  <input type="submit" value="Enter"/>
+  <input class="btn btn-danger" type="submit" value="Enter"/>
 </form>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 </body>
 </html>
 
