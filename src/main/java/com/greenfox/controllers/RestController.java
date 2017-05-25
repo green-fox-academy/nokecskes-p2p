@@ -26,10 +26,15 @@ public class RestController {
   @Autowired
   UserRepository userRepository;
 
+  RestTemplate restTemplate = new RestTemplate();
+
   @CrossOrigin("*")
   @PostMapping("/api/message/receive")
   public MessageStatus receiveMessage(@RequestBody MessagePacket messagePacket) {
-    userMessageRepository.save(messagePacket.getMessage());
+    if (!messagePacket.getClient().getId().equals(System.getenv("CHAT_APP_UNIQUE_ID"))) {
+      userMessageRepository.save(messagePacket.getMessage());
+      restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), messagePacket, MessagePacket.class);
+    }
     return new MessageStatus();
   }
 
@@ -39,7 +44,6 @@ public class RestController {
     userMessageRepository.save(userMessage);
     MessagePacket messagePacket = new MessagePacket(userMessage,
         System.getenv("CHAT_APP_UNIQUE_ID"));
-    RestTemplate restTemplate = new RestTemplate();
     System.out.println("----> DEBUG: " + System.getenv("CHAT_APP_PEER_ADDRESS"));
     System.out.println("----> DEBUG: " + System.getenv("CHAT_APP_UNIQUE_ID"));
     try {
