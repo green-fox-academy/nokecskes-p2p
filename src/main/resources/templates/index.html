@@ -15,12 +15,6 @@
     <input type="submit" class="btn btn-danger" value="Update"/>
   </form>
   <h3 class="text-capitalize" th:text="'send a message '"></h3>
-  <ul>
-    <li>
-      <h4 class="bg-danger" th:text="App"></h4>
-      <div class="bg-warning" th:text="'Hi there! Submit your message using the send button!'"></div>
-    </li>
-  </ul>
   <div>
     <form action="/addmessage" method="post">
     <textarea th:type="text" name="newMessage" rows="8" cols="40">
