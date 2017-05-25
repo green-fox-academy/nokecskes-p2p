@@ -3,7 +3,6 @@ package com.greenfox.service;
 import com.greenfox.models.MessagePacket;
 import com.greenfox.models.StatusError;
 import com.greenfox.models.StatusOk;
-import com.greenfox.models.User;
 import com.greenfox.models.UserMessage;
 import com.greenfox.repository.UserMessageRepository;
 import com.greenfox.repository.UserRepository;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import sun.plugin2.message.Message;
 
 /**
  * Created by K on 2017.05.25..
