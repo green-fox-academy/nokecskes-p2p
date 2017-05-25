@@ -5,11 +5,11 @@ import javax.persistence.Entity;
 /**
  * Created by Connor on 2017.05.22..
  */
-public class MessageStatus {
+public class StatusOk {
 
   private String status;
 
-  public MessageStatus() {
+  public StatusOk() {
     this.status = "ok";
   }
 
