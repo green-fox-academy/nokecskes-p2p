@@ -15,6 +15,12 @@
     <input type="submit" class="btn btn-danger" value="Update"/>
   </form>
   <h3 class="text-capitalize" th:text="'send a message '"></h3>
+  <ul>
+    <li>
+      <h4 class="bg-danger" th:text="App"></h4>
+      <div class="bg-warning" th:text="'Hi there! Submit your message using the send button!'"></div>
+    </li>
+  </ul>
   <div>
     <form action="/addmessage" method="post">
     <textarea th:type="text" name="newMessage" rows="8" cols="40">
@@ -27,18 +33,15 @@
 </div>
 <h3 class="text-capitalize" th:text="'messages'"></h3>
 <div class="container-fluid col-md-4">
-  <ul>
-    <li>
-      <h4 class="bg-danger" th:text="App"></h4>
-      <div class="bg-warning" th:text="'Hi there! Submit your message using the send button!'"></div>
-    </li>
-  </ul>
   <ul th:each="message: ${messages}">
     <li>
       <h4 class="bg-danger" th:text="${message.getUsername()}"></h4>
       <div class="bg-warning" th:text="${message.getText()}"></div>
     </li>
   </ul>
+</div>
+<div class="col-md-4">
+  <img class="img-responsive" th:src="'images/marvin.jpg'" th:width="300"/>
 </div>
 <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
