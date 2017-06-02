@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Connor on 2017.05.22..
  */
-@org.springframework.web.bind.annotation.RestController
-public class RestController {
+@RestController
+public class ChatAppRestController {
 
   @Autowired
   MessageService messageService;

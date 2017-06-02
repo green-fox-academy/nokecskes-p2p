@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Created by Connor on 2017.05.17..
  */
 @Controller
-public class MainController {
+public class ChatAppMainController {
 
   @Autowired
   UserRepository userRepository;
